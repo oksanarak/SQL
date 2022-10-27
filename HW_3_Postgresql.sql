@@ -1,9 +1,7 @@
 --Вывести всех работников, чьи зарплаты есть в базе, вместе с зарплатами
-select employees.employee_name, employee_salary.employee_id, salary.monthly_salary
-from employees join employee_salary 
-on employees.id = employee_salary.employee_id
-join salary
-on employee_salary.salary_id = salary.id;
+select employees.employee_name, salary.monthly_salary
+from employees join salary
+on employees.id = salary.id;
 
 
 --Вывести всех работников, у которых ЗП меньше 2000
@@ -44,6 +42,29 @@ on employees.id = employee_salary.employee_id
 join salary 
 on employee_salary.salary_id = salary.id
 where employees.employee_name is null; 
+
+
+--Вывести все зарплатные позиции меньше 2000, но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.)
+select employees.employee_name, employee_salary.employee_id, salary.monthly_salary  
+from employees full outer join employee_salary
+on employees.id = employee_salary.employee_id
+join salary 
+on employee_salary.salary_id = salary.id
+where employees.employee_name is null
+and monthly_salary < 2000;
+
+
+--Найти всех работников кому не начислена ЗП
+select employees.employee_name, employee_salary.employee_id
+from employees full outer join employee_salary
+on employees.id = employee_salary.employee_id
+where employee_salary.employee_id is null;
+
+
+--Вывести всех работников с названиями их должности
+
+
+
 
 
 
