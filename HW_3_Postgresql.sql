@@ -62,8 +62,56 @@ where employee_salary.employee_id is null;
 
 
 --Вывести всех работников с названиями их должности
+select employees.employee_name, roles_employee.employee_id, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on employees.id = roles_employee.employee_id;
 
 
+--Вывести имена и должность только Java разработчиков
+select employees.employee_name, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on roles.id = roles_employee.role_id 
+where roles.role_name like '% Java %';
+
+
+--Вывести имена и должность только Python разработчиков
+select employees.employee_name, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on roles.id = roles_employee.role_id 
+where roles.role_name like '% Python %';
+
+
+--Вывести имена и должность всех QA инженеров
+select employees.employee_name, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on roles.id = roles_employee.role_id 
+where roles.role_name like '% QA %';
+
+
+--Вывести имена и должность ручных QA инженеров
+select employees.employee_name, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on roles.id = roles_employee.role_id 
+where roles.role_name like '% Manual QA %';
+
+
+--Вывести имена и должность автоматизаторов QA
+select employees.employee_name, roles.role_name
+from employees join roles
+on employees.id = roles.id
+join roles_employee
+on roles.id = roles_employee.role_id 
+where roles.role_name like '% Automation QA %';
 
 
 
