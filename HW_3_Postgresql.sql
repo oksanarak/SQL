@@ -114,5 +114,75 @@ on roles.id = roles_employee.role_id
 where roles.role_name like '% Automation QA %';
 
 
+--Вывести имена и зарплаты Junior специалистов
+select employees.employee_name, salary.monthly_salary, roles.role_name  
+from employees join salary
+on employees.id = salary.id
+join roles_employee
+on employees.id = roles_employee.employee_id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Junior %';
+
+
+--Вывести имена и зарплаты Middle специалистов
+select employees.employee_name, salary.monthly_salary, roles.role_name  
+from employees join salary
+on employees.id = salary.id
+join roles_employee
+on employees.id = roles_employee.employee_id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Middle %';
+
+
+--Вывести имена и зарплаты Senior специалистов
+select employees.employee_name, salary.monthly_salary, roles.role_name  
+from employees join salary
+on employees.id = salary.id
+join roles_employee
+on employees.id = roles_employee.employee_id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Senior %';
+
+
+--Вывести зарплаты Java разработчиков
+select salary.monthly_salary, roles.role_name, employee_salary.salary_id, roles_employee.role_id 
+from salary join roles 
+on salary.id = roles.id
+join employee_salary
+on salary.id = employee_salary.salary_id 
+join roles_employee
+on roles.id = roles_employee.role_id
+where roles.role_name like '% Java developer';
+
+
+select salary.monthly_salary, roles.role_name, employee_salary.salary_id, roles_employee.role_id 
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles.id = roles_employee.role_id
+where roles.role_name like '% Java developer';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
