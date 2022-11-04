@@ -196,14 +196,44 @@ where roles.role_name like 'Middle JavaScript developer';
 
 
 -- Вывести имена и зарплаты Senior Java разработчиков
---select employees.employee_name, salary.monthly_salary, roles.role_name  
---from employees join salary
---on employees.id = salary.id
+select employees.employee_name, salary.monthly_salary, roles.role_name  
+from employees join roles_employee 
+on employees.id = roles_employee.employee_id 
+join roles
+on roles_employee.role_id = roles.id
+join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary 
+on employee_salary.salary_id = salary.id
+where roles.role_name like 'Senior Java developer';
+
+
+--Вывести зарплаты Junior QA инженеров
+select salary.monthly_salary, roles.role_name, employee_salary.salary_id, roles_employee.role_id 
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Junior % QA engineer';
+
+
+--Вывести среднюю зарплату всех Junior специалистов
+--select salary.monthly_salary, roles.role_name, employee_salary.salary_id, roles_employee.role_id 
+--from employees join employee_salary 
+--on employees.id = employee_salary.employee_id 
+--join salary
+--on employee_salary.salary_id = salary.id 
 --join roles_employee
---on employees.id = roles_employee.employee_id
+--on roles_employee.employee_id = employees.id
 --join roles 
 --on roles_employee.role_id = roles.id
---where roles.role_name like 'Senior Java developer';
+--where roles.role_name like 'Junior %';
+
+
 
 
 
