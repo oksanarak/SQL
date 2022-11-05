@@ -222,21 +222,129 @@ where roles.role_name like 'Junior % QA engineer';
 
 
 --Вывести среднюю зарплату всех Junior специалистов
---select salary.monthly_salary, roles.role_name, employee_salary.salary_id, roles_employee.role_id 
---from employees join employee_salary 
---on employees.id = employee_salary.employee_id 
---join salary
---on employee_salary.salary_id = salary.id 
---join roles_employee
---on roles_employee.employee_id = employees.id
---join roles 
---on roles_employee.role_id = roles.id
---where roles.role_name like 'Junior %';
+
+--1 способ
+create table junior_dev(
+	id serial primary key,
+	role_name varchar(50) not null,
+	monthly_salary int not null
+)
+
+insert into junior_dev(role_name, monthly_salary)
+values ('Junior Java developer', 1300),
+       ('Junior JavaScript developer', 2400),
+       ('Junior Python developer', 2500),
+       ('Junior Manual QA engineer', 1300),
+       ('Junior Manual QA engineer', 2200),
+       ('Junior JavaScript developer', 1000),
+       ('Junior Python developer', 1100);
+      
+select avg(monthly_salary) from junior_dev;
+select * from junior_dev;      
+      
+--2 способ
+select avg(salary.monthly_salary)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Junior %';
 
 
+--Вывести сумму зарплат JS разработчиков
+select sum(salary.monthly_salary)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% JavaScript developer';
 
 
+--Вывести минимальную ЗП QA инженеров
+select min(salary.monthly_salary)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% QA engineer';
 
 
+--Вывести максимальную ЗП QA инженеров
+select max(salary.monthly_salary)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% QA engineer';
 
+
+--Вывести количество QA инженеров
+select count(roles.role_name)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% QA engineer';
+
+
+--Вывести количество Middle специалистов
+select count(roles.role_name)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like 'Middle %';
+
+
+--Вывести количество разработчиков
+select count(roles.role_name)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% developer';
+
+
+--Вывести фонд (сумму) зарплаты разработчиков
+select sum(salary.monthly_salary)
+from employees join employee_salary 
+on employees.id = employee_salary.employee_id 
+join salary
+on employee_salary.salary_id = salary.id 
+join roles_employee
+on roles_employee.employee_id = employees.id
+join roles 
+on roles_employee.role_id = roles.id
+where roles.role_name like '% developer';
+
+
+--Вывести имена, должности и ЗП всех специалистов по возрастанию
 
